@@ -20,7 +20,7 @@ my_turtle.hideturtle()
 i =0
 score=0
 user_double_check=[]
-while i <5:
+while i <50:
     # need to add numbers
     user_value=my_screen.textinput(title=f"{score}/50 States Correct", prompt="Enter another state").title()
     states_data_row=states_data[states_data["state"]==user_value]
@@ -41,7 +41,7 @@ while i <5:
             score+=1
 
         i+=1
-    if score==5:
+    if score==50:
         my_turtle.goto(0,250)
         my_turtle.write("Wow! Super...!", True, align="center", font=('Arial', 12, 'bold'))
 my_turtle.goto(x=0,y=250)
