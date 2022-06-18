@@ -13,17 +13,41 @@ image="blank_states_img.gif"
 my_screen.addshape(image)
 states_data=pandas.read_csv("50_states.csv")
 turtle.shape(image)
-turtle.penup()
+
+my_turtle=turtle.Turtle()
+my_turtle.penup()
+my_turtle.hideturtle()
 i =0
+score=0
+user_double_check=[]
 while i <5:
     # need to add numbers
-    user_value=my_screen.textinput(title=f"{i+1}/5 States Correct", prompt="Enter another state").title()
+    user_value=my_screen.textinput(title=f"{score}/50 States Correct", prompt="Enter another state").title()
     states_data_row=states_data[states_data["state"]==user_value]
-    x_pos= int(states_data_row["x"])
-    y_pos= int(states_data_row["y"])
-    turtle.goto(x=x_pos,y=y_pos)
-    turtle.write()
-    i+=1
     # i=9
+    if states_data_row.empty:
+        i+=1
+
+    else: # states_data_row["state"]==user_value:
+        x_pos= int(states_data_row["x"])
+        y_pos= int(states_data_row["y"])
+        my_turtle.goto(x=x_pos,y=y_pos)
+        my_turtle.write(user_value)
+
+        if user_value in user_double_check:
+            pass
+        else:
+            user_double_check.append(user_value)
+            score+=1
+
+        i+=1
+    if score==5:
+        my_turtle.goto(0,250)
+        my_turtle.write("Wow! Super...!", True, align="center", font=('Arial', 12, 'bold'))
+my_turtle.goto(x=0,y=250)
+my_turtle.write(f"your final score: {score}", True, align="center", font=('Arial', 12, 'bold'))
+
+
+
 
 turtle.mainloop()
